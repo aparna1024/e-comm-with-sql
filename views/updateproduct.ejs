@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Update Product</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/updateproduct.css" />
+  </head>
+  <body>
+    <br>
+   
+    <%- include("component/header",{username:username, admin:admin}) %>
+
+      <% if(admin==false){ %>
+        <br><br>
+
+        <h1>Please Login First</h1>
+        For login <a href="/login"> click here</a>
+        <% } else { %>
+          <div class="asdf">
+        <% data.forEach(data=>{%>
+         
+          <div class="container">
+            <form action="/updateproduct" method="post">
+            <img src="<%= data.productimg %>" /><br>
+            Product Name
+            <input type="hidden" name="id" id="id" value="<%=data.productimg %>">
+            <input type="text" id="productname" value="<%=data.productname %>" name="productname" required /><br>
+            Product Description
+            <input type="text" id="productdes"value="<%=data.productdes %>" name="productdes" required /><br>
+            <label for="productprice">Product Price</label>
+            <input type="text" id="productprice" value="<%=data.productprice %>"name="productprice" required /><br>
+            <label for="productquantity">Product Quantity</label>
+            <input type="text" id="productquantity" value="<%=data.productquantity %>" name="productquantity" required /><br>
+            <button  type="submit" class="updateproduct <%= data.productimg %>">update</button>
+            <button type="submit" class="deleteproductadmin <%= data.productimg %>">delete</button>
+          </form>
+          </div>
+        
+  <br>
+    <%})%>
+        </div>
+    <% } %>
+  <script src="js/updateproducts.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Update Product</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/productReq.css" />
+
+  </head>
+  <body>
+    <br>
+    
+    <%- include("component/header",{username:username,admin:admin}) %>
+      <% if(admin===false){ %>
+        <br><br>
+
+        <h1>Please Login First</h1>
+        For login <a href="/login"> click here</a>
+        <% } else { %>
+          <div class="asdf">
+        <% data.forEach(p=>{%>
+         
+          <div class="container " id="r<%=p.productimg %>">
+                <img src="<%= p.productimg %>" /><br>
+                <div class="pr"><%= p.productname %></div><br><hr>
+                <div class="p">Price:<%= p.productprice %></div><br>
+                <div class="p">Description:<%= p.productdes %></div><br>
+                <button  type="submit" class="approveproduct <%= p.productimg %>">Approve</button>
+            <button type="submit" class="rejectproduct <%= p.productimg %>">Reject</button>
+            </div><br>
+            
+        
+  <br>
+    <%})%>
+        </div>
+    <% } %>
+  <script src="js/productReq.js"></script>
+  </body>
+</html>

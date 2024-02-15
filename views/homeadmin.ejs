@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin Home page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/homeadmin.css" />
+    
+</head>
+<body>
+    <% if(sadmin==="true"){ %>
+<div>
+        <% if(status==="false"){ %>
+            <a href="/logout"><button class="btn" style="float: right;">Logout</button></a><br>
+            <br><br>
+            <h1>status is pending to approve</h1>;
+        <% } else if(status==="reject"){ %>
+            <a href="/logout"><button class="btn" style="float: right;">Logout</button></a><br>
+            <br><br>
+        <h1>Status is Rejected for approve</h1>
+        <%} else if(status==="true") {%>
+            <!-- ---------------------------------------------------- --->
+            <!------------------- sales Admin --------------------------->
+            <!-- ----------------------------------------------------- -->
+            <%- include("component/header",{username:username, admin:admin}) %>
+        <br><br><br>
+        <div class="viewMain">
+
+            <div class="view" id="newOrderSA" style="background-color: rgb(97, 250, 97) ; ">
+                <div><b>New Order</b></div><br>
+                <div id="norder"><%= nOrder %></div>
+                
+            </div>
+             <!-- .......... -->
+             <div class="view" id="deliverSA" style="background-color: rgb(62, 211, 161);  ">
+                <div><b>Total delevered</b></div><br>
+                <div><%= dOrder%></div>
+            </div>
+             <!-- .......... -->
+             <div class="view" id="totalorderSA" style="background-color: rgb(250, 91, 91);">
+                <div><b>Total Order</b></div><br>
+                <div><%= allorderRec.length %></div>
+               
+            </div>
+            <!-- .......... -->
+            <!-- *****<div class="view" style="background-color: rgb(245, 245, 94);">
+                <div><b>Total Products</b></div><br>
+                <div><%= nOrder %></div>
+                
+            </div>****** -->
+           
+            <!-- .......... -->
+            <!-- <div class="view" style="background-color: rgb(101, 101, 243);">
+                <div><b>Total Sales</b></div><br>
+                
+            </div> -->
+        </div><br><hr>
+
+        <!-- -----------------------new Order request--------------------------------------------- -->
+        <div id="a">
+                    
+            <div>
+            <div style="text-shadow: 2px 2px 4px #3d3c3c;"><h1>New Order Request :-</h1></div>
+                <% allorderRec.forEach(data=>{ %>
+                    <% if(data.flag=="submit"){ %>
+                    <div class="processis" id="pr<%=data.productimg %><%=data.email %>">
+                        
+                        <div style="display: flex; justify-content: space-around">
+                            <div><b>User Name : <%= data.username %></b></div>
+                            <div><b>User Email : <%= data.email %></b></div>
+                            <div><b>Order Date <%= data.orderdate %></b></div>
+                        </div>
+                        <div class="processis" style="display: flex;">
+                                
+                                        <div class="cls"><img src="<%= data.productimg %>" style="width: 150px; border-style: outset; border-color: black; margin-right:20px;"/></div>
+                                        <div style="margin: 20px; margin-right: 45px; width: 40%;">
+                                        <div class="cls"><b>Product Detail</b></div>
+                                        <div class="cls">Product Name: <%= data.productname %></div>
+                                        <div class="cls">Product Description: <%= data.productdes %></div>
+                                        <div class="cls">Product Price: <%=data.productprice %> Rs.</div>
+                                        </div>
+                                        <div>
+                                            <br>
+                                            <div class="cls"><b>Address</b></div>
+                                            <div class="cls">Name: <%= data.username %></div>
+                                            <div class="cls">Location: <%= data.address %> <%= data.city %></div>
+                                            <div class="cls"><%= data.state %> <%= data.pin %></div>
+                                            <div class="cls">Contact No. <%= data.contact %></div>
+
+                                        </div>
+                                        <div><button type="submit" style="background-color: rgb(243, 243, 86); color: black; " class="conform <%=data.email %> <%=data.productid%> <%=data.addid %> btn">Confirm</button></div>
+                                
+                        </div>
+                    </div>
+                    <% } %>
+                    
+                <% }) %>
+            
+            </div>
+        </div>
+
+<!-- ----------------------------------------------------------------------------------------- -->
+<!-- -----------------------total order deliver --------------------------------------------- -->
+        <div id="b" style="display:none">
+                    
+            <div>
+            <div style="text-shadow: 2px 2px 4px #3d3c3c;"><h1>Total Delivered Order :-</h1></div>
+                <% allorderRec.forEach(data=>{ %>
+                    <% if(data.flag=="delivered"){ %>
+                    <div class="processis">
+                        
+                        <div style="display: flex; justify-content: space-around">
+                            <div><b>User Name : <%= data.username %></b></div>
+                            <div><b>User Email : <%= data.email %></b></div>
+                            <div><b>Order Date <%= data.orderdate %></b></div>
+                            <div><b>Deliverery Date  <%= data.delivereddate %></b></div>
+                        </div>
+                            <div class="processis" style="display: flex;">
+                               
+                                        <div class="cls"><img src="<%= data.productimg %>" style="width: 150px; border-style: outset; border-color: black; margin-right:20px;"/></div>
+                                        <div style="margin: 20px; margin-right: 45px; width: 40%;">
+                                        <div class="cls"><b>Product Detail</b></div>
+                                        <div class="cls">Product Name: <%= data.productname %></div>
+                                        <div class="cls">Product Description: <%=data.productdes %></div>
+                                        <div class="cls">Product Price: <%=data.productprice %> Rs.</div>
+                                        </div>
+                                        <div>
+                                            <br>
+                                            <div class="cls"><b>Address</b></div>
+                                            <div class="cls">Name: <%= data.username %></div>
+                                            <div class="cls">Location: <%= data.address %> <%= data.city %></div>
+                                            <div class="cls"><%= data.state %> <%= data.pin %></div>
+                                            <div class="cls">Contact No. <%= data.contact %></div>
+
+                                        </div>
+                              
+                            </div>
+                            <div style="display: flex; justify-content: space-around">
+                                <div><b>Status= <%= data.flag %></b></div>
+                            </div>
+                            <% } %>
+                    </div>
+                <% }) %>
+                
+            </div>
+        </div>
+
+        
+  
+  <!-- -------------------------------------------------------------------------------- -->
+ <!-- -----------------------  total Orders--------------------------------------------- -->
+ <div id="c" style="display:none">
+                    
+    <div>
+    <div style="text-shadow: 2px 2px 4px #3d3c3c;"><h1>Total Order Request :-</h1></div>
+        <% allorderRec.forEach(data=>{ %>
+            <div class="processis">
+                
+                <div style="display: flex; justify-content: space-around">
+                    <div><b>User Name : <%= data.username %></b></div>
+                    <div><b>User Email : <%= data.email %></b></div>
+                    <div><b>Order Date <%= data.orderdate %></b></div>
+                    <% if(data.flag=="delivered" ){ %>
+                        <div><b>Delivered Date <%= data.delivereddate %></b></div>
+                    <% } %>
+                </div>
+                    <div class="processis" style="display: flex;">
+                        
+                                <div class="cls"><img src="<%= data.productimg %>" style="width: 150px; border-style: outset; border-color: black; margin-right:20px;"/></div>
+                                <div style="margin: 20px; margin-right: 45px; width: 40%;">
+                                <div class="cls"><b>Product Detail</b></div>
+                                <div class="cls">Product Name: <%= data.productname %></div>
+                                <div class="cls">Product Description: <%=data.productdes %></div>
+                                <div class="cls">Product Price: <%=data.productprice %> Rs.</div>
+                                </div>
+                                <div>
+                                    <br>
+                                    <div class="cls"><b>Address</b></div>
+                                    <div class="cls">Name: <%= data.username %></div>
+                                    <div class="cls">Location: <%= data.address %> <%= data.city %></div>
+                                            <div class="cls"><%= data.state %> <%= data.pin %></div>
+                                            <div class="cls">Contact No. <%= data.contact %></div>
+                                </div>
+                        
+                    </div>
+                    <div style="display: flex; justify-content: space-around">
+                        <div><b id="status<%=data.email %><%=data.productid%><%=data.addid %>">Status= <%= data.flag %></b></div>
+                        
+                    </div>
+            </div>
+        <% }) %>
+        
+    </div>
+</div>
+
+</div>
+
+        <% } %>
+        <script src="./js/salesadmin.js"></script>
+    
+     <% }else{ %>
+
+
+
+
+
+
+            <!------------ ----------------------------------------------------- -->
+            <!----------------------- main admin -------------------------------- -->
+            <!-- ---------------------------------------------------------------- -->
+    <br>
+        <%- include("component/header",{username:username, admin:admin}) %>
+    <br>
+    <br><br>
+    <div>
+        <div>
+            
+            <div >
+                <div class="viewMain">
+
+                    <div class="view" id="newAdminRequestAre" style="background-color: rgb(97, 250, 97) ; ">
+                        <div><b>New Admin Request</b></div><br>
+                        <div id="nPending"><%= Npending %></div>
+                    </div>
+                    <!-- .......... -->
+                    <div class="view" id="totalApprovedAdminRequestAre" style="background-color: rgb(245, 245, 94);">
+                        <div><b>Total Approved Request</b></div><br>
+                        <div id="nApprove"><%= Napprove %></div>
+                    </div>
+                    <!-- .......... -->
+                    <div class="view" id="totalRejectedAdminAre" style="background-color: rgb(250, 91, 91);">
+                        <div><b>Total Rejected Request</b></div><br>
+                        <div id="nReject"><%= Nreject %></div>
+                    </div>
+                    <!-- .......... -->
+                    <div class="view"  id="totalSalesAdminAre" style="background-color: rgb(101, 101, 243);">
+                        <div><b>Total Sales Admin</b></div><br>
+                        <div><%= reqAdmin.length %></div>
+                    </div>
+                </div>
+                <br><hr>
+                <!-- div for dispaly NEW Admin Request-->
+                <div id="newAdminRequest">
+                    
+                    <div>
+                    <div style="text-shadow: 2px 2px 4px #3d3c3c;"><h1>New Admin Request for Status Approval</h1></div>
+
+                        <div class="process">
+                                <div>Shop Name</div>
+                                <div>Email ID</div>
+                                
+                                <div>Status</div>
+                        </div>
+                    </div>
+                    <div>
+                        <% reqAdmin.forEach(data=>{%>
+                            <% if(data.flag==="false") { %>
+                                <div class="process" id="<%=data.email %>">
+                                    <div id="shopname<%=data.email %>"><%= data.username %></div>
+                                    <div><%= data.email %></div>
+                                    <div>
+                                        <button type="submit" style="background-color: rgb(243, 243, 86); color: black; " class="Approve <%=data.email %> <%=data.email%> btn">Approve</button>
+                                        <button type="submit" style="background-color: rgb(245, 136, 96); color: black; " class="Reject <%=data.email %> <%=data.email%> btn">Reject</button>
+                                    </div>
+                                </div>
+                        <%} })%>
+                    </div>
+                </div>
+
+                <!-- div for dispaly approved Admin Request-->
+                <div id="totalApprovedAdminRequest" style="display:none">
+                    <div>
+                        <div style="text-shadow: 2px 2px 4px #3d3c3c;"><h1>Approved Admin Request :- </h1></div>
+                        <div class="process">
+                            <div>Shop Name</div>
+                            <div>Email ID</div>
+                           
+                            <div>Status</div>
+                        </div>
+                    </div>
+                
+                    <div id="addAproveAdmin">
+
+                        <% reqAdmin.forEach(data=>{%>
+                            <% if(data.flag==="true") { %>
+                                <div class="process" id="<%=data.email %>">
+                                    <div><%= data.username %></div>
+                                    <div><%= data.email %></div>
+                                    
+                                   <div>Approved</div>
+                                </div>
+                        <%} })%>
+                    </div>
+
+                </div>
+
+                <!-- div for dispaly rejected Admin Request-->
+                <div id="totalRejectedAdminRequest" style="display:none">
+                    <div>
+                        <div style="text-shadow: 2px 2px 4px #3d3c3c;"><h1>Rejected Admin Request :- </h1></div>
+                        <div class="process">
+                            <div>Shop Name</div>
+                            <div>Email ID</div>
+                           
+                            <div>Status</div>
+                        </div>
+                    </div>
+                    <div id="addRejectAdmin">
+
+                        <% reqAdmin.forEach(data=>{%>
+                            <% if(data.flag==="reject") { %>
+                                <div class="process" id="<%=data.email %>">
+                                    <div><%= data.username %></div>
+                                    <div><%= data.email %></div>
+                                    
+                                   <div>Rejected</div>
+                                </div>
+                        <%} })%>
+                    </div>
+
+                    </div>
+                
+
+                <!-- div for dispaly total sales Admin-->
+                <div id="totalSalesAdmin" style="display:none">
+                    <div>
+                        <div style="text-shadow: 2px 2px 4px #3d3c3c;"><h1>All Sales Admin :- </h1></div>
+                        <div class="process">
+                            <div>Shop Name</div>
+                            <div>Email ID</div>
+                           
+                            <div>Status</div>
+                        </div>
+                    </div>
+                    <div id="approveAdmin">
+
+                        <% reqAdmin.forEach(data=>{%>
+                            
+                                <div class="process" id="<%=data.email %>">
+                                    <div><%= data.username %></div>
+                                    <div><%= data.email %></div>
+                                   <div id="salesidis<%=data.email %>"><%=data.flag %></div>
+                                </div>
+                        <% })%>
+                    </div>
+
+
+                    </div>
+                </div>
+            </div>
+    </div>
+    <script src="./js/mainadmin.js"></script>
+    <% } %>
+</div>
+</body>
+</html>

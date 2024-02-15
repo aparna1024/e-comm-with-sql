@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my card</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/addcard.css" />
+
+</head>
+<body>
+    <br>
+    <div id="head">
+    <%- include("component/header",{username:username,admin:admin,amount:amount}) %></div>
+    <div class="asdfg" id="asdfg">
+           <div id="top">
+                <div class="product-container">
+                    <div class="subProductDiv">
+                        <div class="asdf" id="asdf">
+                            <% data.forEach(productdata=>{%>
+
+                                <div class="container" cid=<%=productdata.productimg %>>
+                                    <img src="<%= productdata.productimg %>" /><br>
+                                    <div class="pr"><%= productdata.productname %></div><br><hr>
+                                    <div class="p">Price:<%= productdata.productprice %></div><hr><br>
+                                    <div class="p">Quantity:
+                                        <i class="fa" id="faSub">&#xf068;</i>
+                                        <span id="q"> <%= productdata.quantity %> </span>
+                                        <i class="fa" id="faAdd">&#xf067;</i>
+                                    </div><br>
+                                    <div style="display: flex; ">
+                                    <button type="submit"  class="viewdetails <%=productdata.productimg %> btn">View Details</button>
+                                    <button type="submit"  class="delete <%=productdata.productimg %> <%=productdata.productprice %> btn">Detete</button>
+                                    </div>
+                                </div><br>
+                
+                            <% })%>
+                        </div>
+                        <div id="Address" style="display:none; ">
+                            <div style="padding-left:10%; padding-right: 10%;" >
+                                <div style="display:flex; justify-content: space-around">
+                                    <div style="font-size: 18px;">
+                                        <b>Select Delivery Address</b>
+                                    </div>
+                                    <div >
+                                        <button class="btn" style="width: 100%;" id="NewAddressIs">+ ADD NEW ADDRESS</button>
+                                    </div>
+                                </div>
+                                <div id="AddressList" >
+                                
+                                </div>
+                            </div>
+                        </div>
+                        <div class="AddressTab" id="AddressTab" >
+                            <div >
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0px; padding-top:10px ;">
+                                <div style="margin: 5px; padding: 15px;"><b>ADD ADDRESS</b></div>
+                                <div id="cutNewAddressfield"><i class="fa-solid fa-xmark" style=" float: right; margin: 5px; padding:15px"></i></div>
+                            </div><hr>
+                            <div style="margin: 10px; padding: 5px; ">
+                                <div style="position: relative;">
+                                <i class="fa-solid fa-phone"></i>
+                                <b style="padding: 5px; font-size: large;">Contact Details</b><br><br>
+                                <pl>Name</pl>
+                                <input type="text" id="name" placeholder="Name"/><br><br>
+                                <pl>Contact Number</pl>
+                                <input type="text" id="ContactNo"placeholder="Contact Number"/>
+                                <br><br><br>
+                                <i class="fa-solid fa-location-dot"></i>
+
+                                <b style="padding: 5px; font-size: large;">Address</b>
+                                <br>
+                                <br>
+                                <input type="text" id="DAddress"  placeholder="Enter Address"><br><br>
+                                
+                                <pl>Pincode</pl>
+                                <input type="text" id="pin" placeholder="Pincode"/><br><br>
+                                <div style="display: flex; justify-content: space-between; ">
+                                    <div>
+                                    <pl>City</pl>
+                                    <input type="text" id="city" placeholder="City"/>
+                                    </div>
+                                    <div>
+                                    <pl>State</pl>
+                                    <input type="text" id="state" placeholder="State"/>
+                                    </div>
+                                </div>
+                                <br>
+                                <button class="btn" style="width: 100%;" id="saveAddress">Save Address and Continue</button>
+
+                                </div>
+                            </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+
+
+                <div id="calculation">
+                    <div class="cal">
+                    <div class="i"><b>PRICE DETAILS</b></div><hr>
+                    <div class="l"><div>Price(<oo id="item" ><%= productNo %></oo>)Products</div><div style="display: flex;"><div>Rs.</div><div id="xxx"><%= amount %></div></div></div>
+                    <div class="l"><div>Delivery Charges</div><div > Free</div></div>
+                    <hr>
+                    <div class="l"><div><h3>Total Amount</h3></div><div style="display: flex;"><div style="padding-top: 20px;"> Rs.</div><div id="xxxx" style="padding-top: 20px;"> <%= amount %></div></div></div>
+                    </div>
+                    <div>
+                        <button class="btn" style="width: 100%;" id="continue">Continue</button>
+                    </div>
+                </div>
+            </div>
+    </div>  
+    <div class="products-preview" >
+        <% data.forEach(productdata=>{%>
+            
+        <div class ="right" kid=<%= productdata.productimg %>>
+            <div id="cut"><i class="fa-solid fa-xmark"></i></div>
+            <div id="le">
+                <div id="left">
+                    <div><img class="imag" src="<%= productdata.productimg %>" /></div>
+                    <button type="submit"  class="addcard <%=productdata.productimg %> btn">Add To Cart</button>
+                </div>
+            <div id="rigthis">
+                <h3><u><label for="productname">Product Name</label></u></h3>
+                <h4><%= productdata.productname %></h4><hr>
+                <h3><u><label for="productdes">Product Description</label></u></h3>
+                <h6><%= productdata.productdes %></h6><hr>
+                <h3><u><label for="productprice">Product Price</label></u></h3>
+                <h5>Rs. <%= productdata.productprice %></h5><hr>
+                <h3><u><label for="productquantity">Product Net Quantity</label></u></h3>
+                <h5><%= productdata.quantity %></h5>
+            </div>
+            </div>
+        </div>
+        <%})%>
+    </div> 
+        <script src="js/addcard.js"></script>
+</body>
+</html>

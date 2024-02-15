@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="./css/style.css" />
+
+  </head>
+  <body>
+    <br>
+    <a href="/">home</a>
+    <form action="/registration" method="post" class="form" onsubmit="return validations()">
+    <a href="/login">login</a> 
+      <h1>Sign Up</h1>
+      <label for="name">Username</label><br><br>
+      <input class="input" id="username" name="username" type="text" placeholder="Enter username" autocomplete="off"/><span id="user" class="validation"></span><br>
+      <label for="email">Email</label><br><br>
+      <input class="input" id="email" name="email" type="text" placeholder="Enter email" autocomplete="off"/><span id="useremail" class="validation"></span><br>
+      <label for="password">Password</label><br><br>
+      <input class="input" type="password" name="password" id="password" password="password" placeholder="Enter password" autocomplete="off"/><span id="userpass" class="validation"></span><br>
+      <input type="submit" value="Sign Up" /><br><br>
+      
+    </form>
+    
+  </body>
+  <script src="js/registration.js"></script>
+</html>

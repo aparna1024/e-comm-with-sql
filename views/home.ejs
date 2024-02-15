@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/home.css" />
+    
+</head>
+<body>
+    <br>
+    <div id="navbar">
+        <%- include("component/header",{username:username}) %></div>
+    <br>
+    <% if(username===null) {%>
+    <div class="home_content">
+    <h1>we are at home page</h1>
+        <h3>for login to your account <a href="/login">click here</a></h3><br>
+        <h3>to create new account/signup <a href="/registration">click here</a></h3>
+    </div>
+    <% } else { %>
+<br>
+<div class="as" id="as">
+    <a href="/cart"><button class="btn" style="float: right;">mycart</button></a><br>
+</div>
+        
+        <div class="product-container">
+            <div class="subProductDiv">
+                <div class="asdfg" id="asdfg">
+                    
+                <div class="asdf" id="asdf">
+                    <% data.forEach(productdata=>{%>
+                    
+                    <div class="container">
+                        <img src="<%= productdata.productimg %>" /><br>
+                        <div class="pr"><%= productdata.productname %></div><br><hr>
+                        <div class="p">Price:<%= productdata.productprice %></div><br>
+                        <button type="submit"  class="viewdetails <%=productdata.productimg %> btn" >View Details</button>
+                        <button type="submit"  class="addcard <%=productdata.productimg %> btn">Add To Cart</button>
+                    </div><br>
+                    
+                    <%})%>
+                </div>
+                </div>
+                <div class="products-preview" >
+                    <% data.forEach(productdata=>{%>
+                    
+                        <div class ="right" kid=<%= productdata.productimg %>>
+                            <div id="cut"><i class="fa-solid fa-xmark"></i></div>
+                            <div id="le">
+                            <div id="left">
+                                <div><img class="imag" src="<%= productdata.productimg %>" /></div>
+                                <button type="submit"  class="addcard <%=productdata.productimg %> btn">Add To Cart</button>
+                                </div>
+                            <div id="rigthis">
+                            <h3><u><label for="productname">Product Name</label></u></h3>
+                           <h4><%= productdata.productname %></h4><hr>
+                           <h3><u><label for="productdes">Product Description</label></u></h3>
+                            <h6><%= productdata.productdes %></h6><hr>
+                            <h3><u><label for="productprice">Product Price</label></u></h3>
+                            <h5>Rs. <%= productdata.productprice %></h5><hr>
+                            <h3><u><label for="productquantity">Product Net Quantity</label></u></h3>
+                            <h5><%= productdata.productquantity %></h5>
+                        </div>
+                    </div>
+                        </div>
+                   
+                    <%})%>
+                </div>
+            </div>
+        </div>      
+   <% }%>
+   <script src="js/home.js">
+   </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+
+.container , .sd.container{
+    width: 20%;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;   
+} 
+.product-container{
+    margin-top: 10px;
+    width: 97%;
+    padding: 8px;
+}
+
+.asdfg.active ,.as.active{
+    filter: blur(20px);
+    pointer-events: none;
+    position: fixed;
+}
+.subProductDiv{
+    padding-left: 5%;
+    margin: 0px;
+    max-width: 100%;
+}
+
+h1{
+text-align: center;
+margin: bottom 20px;
+ }
+img{
+
+    width: 230px;
+    height: 160px;
+}
+.asdf{
+    margin: 0px;
+    display:flex;
+    flex-wrap: wrap;
+}
+.pr{
+   width: 200px;
+   height: 10%;
+}
+.p{
+    padding: 3px;
+}
+input[type="submit"]{
+    
+    color: #fff;
+    float:right;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
+    background-color: #fff;
+    position:fixed;
+    top:10%;
+    left:30%;
+    margin-bottom: 10%;
+   height: 400px;
+    width: 600px;
+    padding :50px;
+    visibility: hidden;
+    /* opacity: 0; */
+}
+.rigth .active{
+    visibility: visible;
+    opacity: 1;
+}
+.right #left img{
+    padding: 10px;
+    height: 300px;
+    width: 300px;
+}
+.right #cut i{
+    width:14px;
+    float: right;
+    padding: 3px;
+}
+
+i:hover{
+    border-radius: 10px;
+    background-color: rgb(248, 244, 244);
+    cursor: pointer;
+}
+.right #le {
+    margin-top: 5px;
+    display: flex;
+}
+.rigth #right {
+    padding: 20px;
+    margin: 5px;
+
+}

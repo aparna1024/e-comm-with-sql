@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transporter</title>
+    <link rel="stylesheet" href="./css/transporter.css" />
+</head>
+<body>
+
+    <div style="float: right;">
+        <a href="/logout">Logout</a>
+    </div>
+    <div style="text-shadow: 2px 2px 4px #3d3c3c; text-align: center;"><h1>Transporter Portal</h1></div>
+    <div class="viewMain">
+
+        <div class="view" id="newconformation" style="background-color: rgb(97, 250, 97) ; ">
+            <div><b>New conformation</b></div><br>
+            <div id="nConformis"><%= nConform %></div>
+            
+        </div>
+        <div class="view" id="dispatchedOrder" style="background-color: rgb(245, 245, 94);">
+            <div><b>Dispatched Order</b></div><br>
+            <div id="nDispatchis"><%= nDispatch %></div>
+            
+        </div>
+        <div class="view" id="deliveredOrder" style="background-color: rgb(62, 211, 161); ">
+            <div><b>Delivered Order</b></div><br>
+            <div id="nDeliveris"><%= nDeliver %></div>
+        </div>
+    </div>
+    <hr>
+    <!-- ------------------------------------------------------------------------------------------------- -->
+    <div id="newconformationdiv">
+        <div>
+            <div style="text-shadow: 2px 2px 4px #3d3c3c;"><h1>New Conformed Order:-</h1></div>
+            <% orderdata.forEach(data=>{%>
+
+                       <% if(data.flag=="conform"){ %>
+                    <div class="processis" id="<%= data.productimg %><%= data.userid %>" style="display:flex ">
+                        <div style="width: 30%;">
+                            <div class="cls"><b>User Details</b></div>
+                            <div class="cls">User Name : <%= data.username %></div>
+                            <div class="cls">User Email : <%= data.userid %></div>
+                            <div class="cls">Order Date <%= data.orderdate %></div>
+                        </div>
+                        <div style="width: 30%;">
+                            <div class="cls"><b>Address</b></div>
+                            <div class="cls">Name: <%= data.username %></div>
+                            <div class="cls">Location: <%= data.address %><%= data.city %></div>
+                            <div class="cls"><%= data.state %><%= data.pin %></div>
+                            <div class="cls">Contact No. <%= data.contact %></div>
+                        </div>
+                        
+
+                        <div><button type="submit" style="background-color: rgb(243, 243, 86); color: black; " class="dispatch <%=data.productid %> <%=data.email %>  btn">Dispatch</button></div>
+
+                    </div>
+                <%}} ) %>
+        </div>
+    </div>
+    <!-- -------------------------------------------------------------------------------------------- -->
+    <!-- -------------------------------------------------------------------------------------------- -->
+    <div id="dispatchdiv" style="display: none;">
+        <div>
+            <div style="text-shadow: 2px 2px 4px #3d3c3c;"><h1> Dispatch Order:-</h1></div>
+            <% orderdata.forEach(data=>{ %>
+                       <% if(data.flag=="dispatched"){ %>
+                    <div class="processis" id="deliver<%= data.productid %>" style="display:flex ">
+                        <div style="width: 30%;">
+                            <div class="cls"><b>User Details</b></div>
+                            <div class="cls">User Name : <%= data.username %></div>
+                            <div class="cls">User Email : <%= data.email %></div>
+                            <div class="cls">Order Date <%= data.orderdate %></div>
+                            <div class="cls">Order Date <%= data.dispatchdate %></div>
+                        </div>
+                        <div style="width: 30%;">
+                            <div class="cls"><b>Address</b></div>
+                            <div class="cls">Name: <%= data.username %></div>
+                            <div class="cls">Location: <%= data.address %><%= data.city %></div>
+                            <div class="cls"><%= data.state %><%= data.pin %></div>
+                            <div class="cls">Contact No. <%= data.contact %></div>
+                        </div>
+                       
+                        <div><button type="submit" style="background-color: rgb(62, 211, 161); " class="deliver <%=data.productid %> <%=data.email %>  btn">Deliver</button></div>
+
+                    </div>
+                <%} })%>
+        </div>
+    </div>
+<!-- ------------------------------------------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------------------------------------------ -->
+<div id="delivereddiv" style="display: none;">
+    <div>
+        <div style="text-shadow: 2px 2px 4px #3d3c3c;"><h1>Delivered Order:-</h1></div>
+        <% orderdata.forEach(data=>{%>
+            <% if(data.flag=="delivered"){ %>
+                <div class="processis" id="<%= data.productid %>" style="display:flex ">
+                    <div style="width: 30%;">
+                        <div class="cls"><b>User Details</b></div>
+                        <div class="cls">User Name : <%= data.username %></div>
+                        <div class="cls">User Email : <%= data.useremail %></div>
+                        <div class="cls">Order Date <%= data.orderdate %></div>
+                    </div>
+                    <div style="width: 30%;">
+                        <div class="cls"><b>Address</b></div>
+                        <div class="cls">Name: <%= data.username %></div>
+                        <div class="cls">Location: <%= data.address %><%= data.city %></div>
+                        <div class="cls"><%= data.state %><%= data.pin %></div>
+                        <div class="cls">Contact No. <%= data.contact %></div>
+                    </div>
+                   
+                    <div class="cls">Delivery Date <%= data.delivereddate %></div>
+                    
+                </div>
+            <%} }) %>
+    </div>
+</div>
+
+</body>
+<script>
+    var newconformation=document.getElementById("newconformation");
+    newconformation.addEventListener("click",function(){
+        var newconformationdiv=document.getElementById("newconformationdiv");
+        newconformationdiv.style.display="block";
+
+        var dispatchdiv=document.getElementById("dispatchdiv");
+        dispatchdiv.style.display="none";
+
+        var delivereddiv=document.getElementById("delivereddiv");
+        delivereddiv.style.display="none";
+    })
+    var dispatchedOrder=document.getElementById("dispatchedOrder");
+    dispatchedOrder.addEventListener("click",function(){
+        var newconformationdiv=document.getElementById("newconformationdiv");
+        newconformationdiv.style.display="none";
+
+        var delivereddiv=document.getElementById("delivereddiv");
+        delivereddiv.style.display="none";
+
+        var dispatchdiv=document.getElementById("dispatchdiv");
+        dispatchdiv.style.display="block";
+    })
+    var deliveredOrder=document.getElementById("deliveredOrder");
+    deliveredOrder.addEventListener("click",function(){
+        var newconformationdiv=document.getElementById("newconformationdiv");
+        newconformationdiv.style.display="none";
+
+        var dispatchdiv=document.getElementById("dispatchdiv");
+        dispatchdiv.style.display="none";
+
+        var delivereddiv=document.getElementById("delivereddiv");
+        delivereddiv.style.display="block";
+    })
+
+
+
+    const dispatch=document.querySelectorAll(".dispatch");
+    dispatch.forEach((button,i)=>{
+        button.addEventListener("click",function(err){
+            const pid=`${button.classList[1]}`
+            const useremail=`${button.classList[2]}`
+            
+            var date=new Date();
+            console.log(date);
+                        
+            var mnth=date.getMonth()+1;
+            var yr=date.getFullYear();
+            var dt=date.getDate();
+            var dispatchdate=dt+"-"+mnth+"-"+yr;
+            console.log("dispatchdate="+dispatchdate);
+
+            dispatchstatusup(pid,useremail,dispatchdate,function(err){
+                if(err){
+                    alert(err)
+                }else{
+                    console.log("dispatch status updated!!!!!");
+
+                    // const div1=document.createElement('div');
+                    // div1.setAttribute("class","processis");
+                    // div1.setAttribute("id",oid);
+                    // div1.style.display="flex";
+
+                    // const div2=document.createElement("div");
+                    // div2.style.width="30%";
+                    // const div21=document.createElement("div");
+                    // div21.setAttribute("class","cls");
+                    // div21.innerText="User Details";
+                    // const div22=document.createElement("div");
+                    // div22.setAttribute("class","cls");
+                    // div22.innerText="User Name : "+username;
+                    // const div23=document.createElement("div")
+                    // div23.setAttribute("class","cls");
+                    // div23.innerText="User Email : "+useremail;
+                    // const div24=document.createElement("div");
+                    // div24.setAttribute("class","cls");
+                    // div24.innerText="Order Date : "+odate+"/"+month+"/"+year;
+
+                    // div2.appendChild(div21);
+                    // div2.appendChild(div22);
+                    // div2.appendChild(div23);
+                    // div2.appendChild(div24);
+
+                    // const div3=document.createElement("div");
+                    // div3.style.width="30%";
+                    // const div31=document.createElement("div")
+                    // div31.setAttribute("class","cls");
+                    // div31.innerText="Address";
+                    // const div32=document.createElement("div")
+                    // div32.setAttribute("class","cls");
+                    // div32.innerText="Name: "+oname;
+                    // const div33=document.createElement("div")
+                    // div33.setAttribute("class","cls");
+                    // div33.innerText="Location: "+addcity;
+                    // const div34=document.createElement("div")
+                    // div34.setAttribute("class","cls");
+                    // div34.innerText=statepin;
+                    // const div35=document.createElement("div")
+                    // div35.setAttribute("class","cls");
+                    // div35.innerText="Contact No. "+contactNo;
+
+                    // div3.appendChild(div31);
+                    // div3.appendChild(div32);
+                    // div3.appendChild(div33);
+                    // div3.appendChild(div34);
+                    // div3.appendChild(div35);
+
+                    // const div4=document.createElement("div");
+                    // div4.style.width="30%";
+                    // const div41=document.createElement("div")
+                    // div41.setAttribute("class","cls");
+                    // div41.innerText="Shop Details";
+                    // const div42=document.createElement("div")
+                    // div42.setAttribute("class","cls");
+                    // div42.innerText="Shop Name: "+shopname;
+                    // const div43=document.createElement("div")
+                    // div43.setAttribute("class","cls");
+                    // div43.innerText="Shop Email: "+semail;
+
+                    // div4.appendChild(div41);
+                    // div4.appendChild(div42);
+                    // div4.appendChild(div43);
+
+                    // const div5=document.createElement("div")
+                    // const dbtn=document.createElement("button");
+                    // dbtn.style.backgroundColor="rgb(62, 211, 161)"
+                    // dbtn.setAttribute("class","deliver"+oid+""+useremail+""+pid+""+username+""+odate+""+month+""+year+""+oname+""+addcity+""+statepin+""+contactNo+""+shopname+""+semail);
+
+                    // dbtn.innerText="Deliver";
+                    // div5.appendChild(dbtn);
+
+                    // div1.appendChild(div2);
+                    // div1.appendChild(div3);
+                    // div1.appendChild(div4);
+                    // div1.appendChild(div5);
+
+                    // const mdiv=document.getElementById("dispatchdiv");
+                    // mdiv.appendChild(div1);
+
+                    const nConformis=document.getElementById("nConformis");
+                    const n=Number(nConformis.innerText)
+                    nConformis.innerText=n-1;
+
+                    const nDispatchis=document.getElementById("nDispatchis");
+                    const nn=Number(nDispatchis.innerText);
+                    nDispatchis.innerText=nn+1;
+                    
+                    const divk=document.getElementById(pid+""+useremail);
+                    console.log(divk);
+                    divk.remove();
+                }
+            })
+        })
+    })
+
+    function dispatchstatusup(pid,useremail,dispatchdate,callback){
+    fetch('/dispatchorder',{
+    method:"post",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({pid:pid,uemail:useremail,dispatchdate:dispatchdate}),
+    }).then(function(res){
+    if(res.status===200){
+        console.log("approved status is 200");
+        callback();
+    }else{
+        callback("something went wrong");
+    }
+    })
+    }
+    const deliver=document.querySelectorAll(".deliver");
+    deliver.forEach((button,i)=>{
+        button.addEventListener("click",function(err){
+            const pid=`${button.classList[1]}`
+            const useremail=`${button.classList[2]}`
+            
+
+            var date=new Date();
+            console.log(date);
+                        
+            var mnth=date.getMonth()+1;
+            var yr=date.getFullYear();
+            var dt=date.getDate();
+            var delivereddate=dt+"-"+mnth+"-"+yr;
+           
+            console.log("delivereddate="+delivereddate);
+            deliverystatusup(pid,useremail,delivereddate,function(err){
+                if(err){
+                    alert(err)
+                }else{
+                    console.log("dispatch status updated!!!!!");
+
+                    // const div1=document.createElement('div');
+                    // div1.setAttribute("class","processis");
+                    // div1.setAttribute("id",oid);
+                    // div1.style.display="flex";
+
+                    // const div2=document.createElement("div");
+                    // div2.style.width="30%";
+                    // const div21=document.createElement("div");
+                    // div21.setAttribute("class","cls");
+                    // div21.innerText="User Details";
+                    // const div22=document.createElement("div");
+                    // div22.setAttribute("class","cls");
+                    // div22.innerText="User Name : "+username;
+                    // const div23=document.createElement("div")
+                    // div23.setAttribute("class","cls");
+                    // div23.innerText="User Email : "+useremail;
+                    // const div24=document.createElement("div");
+                    // div24.setAttribute("class","cls");
+                    // div24.innerText="Order Date : "+odate+"/"+month+"/"+year;
+
+                    // div2.appendChild(div21);
+                    // div2.appendChild(div22);
+                    // div2.appendChild(div23);
+                    // div2.appendChild(div24);
+
+                    // const div3=document.createElement("div");
+                    // div3.style.width="30%";
+                    // const div31=document.createElement("div")
+                    // div31.setAttribute("class","cls");
+                    // div31.innerText="Address";
+                    // const div32=document.createElement("div")
+                    // div32.setAttribute("class","cls");
+                    // div32.innerText="Name: "+oname;
+                    // const div33=document.createElement("div")
+                    // div33.setAttribute("class","cls");
+                    // div33.innerText="Location: "+addcity;
+                    // const div34=document.createElement("div")
+                    // div34.setAttribute("class","cls");
+                    // div34.innerText=statepin;
+                    // const div35=document.createElement("div")
+                    // div35.setAttribute("class","cls");
+                    // div35.innerText="Contact No. "+contactNo;
+
+                    // div3.appendChild(div31);
+                    // div3.appendChild(div32);
+                    // div3.appendChild(div33);
+                    // div3.appendChild(div34);
+                    // div3.appendChild(div35);
+
+                    // const div4=document.createElement("div");
+                    // div4.style.width="30%";
+                    // const div41=document.createElement("div")
+                    // div41.setAttribute("class","cls");
+                    // div41.innerText="Shop Details";
+                    // const div42=document.createElement("div")
+                    // div42.setAttribute("class","cls");
+                    // div42.innerText="Shop Name: "+shopname;
+                    // const div43=document.createElement("div")
+                    // div43.setAttribute("class","cls");
+                    // div43.innerText="Shop Email: "+semail;
+
+                    // div4.appendChild(div41);
+                    // div4.appendChild(div42);
+                    // div4.appendChild(div43);
+
+                    // const div5=document.createElement("div")
+                    // div5.setAttribute("class","cls");
+                    // div5.innerText="Delivery Date: "+dt+"/"+mnth+"/"+yr;
+
+                    // div1.appendChild(div2);
+                    // div1.appendChild(div3);
+                    // div1.appendChild(div4);
+                    // div1.appendChild(div5);
+
+                    // const mdiv=document.getElementById("delivereddiv");
+                    // mdiv.appendChild(div1);
+
+                    const nDeliveris=document.getElementById("nDeliveris");
+                    const n=Number(nDeliveris.innerText);
+                    nDeliveris.innerText=n+1;
+                    const nDispatchis=document.getElementById("nDispatchis");
+                    const nn=Number(nDispatchis.innerText);
+                    nDispatchis.innerText=nn-1;
+
+
+                    const divk=document.getElementById("deliver"+pid);
+                    divk.remove();
+
+                }
+            })
+
+        })
+    })
+
+    function deliverystatusup(pid,useremail,delivereddate,callback){
+    fetch('/deliverorder',{
+    method:"post",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({pid:pid,uemail:useremail,delivereddate:delivereddate}),
+    }).then(function(res){
+    if(res.status===200){
+        console.log("approved status is 200");
+        callback();
+    }else{
+        callback("something went wrong");
+    }
+    })
+    }
+
+</script>
+
+</html>

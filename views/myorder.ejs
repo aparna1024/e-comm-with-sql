@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My order</title>
+    <link rel="stylesheet" href="./css/style.css" />
+</head>
+<style>
+    .processis{
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        margin: 20px;
+        padding: 10px;
+    }
+    .cls{
+        margin: 10px;
+    }
+    img{
+        margin-left: 30px;
+    }
+    .view:hover{
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 1.1);
+    }
+    .view{
+        padding:5px;
+        text-align: center;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        padding-top: 15px;
+    }
+</style>
+<body>    
+    <br>
+    <%- include("component/header",{username:username}) %>
+    <br>
+    <h2>My order:=</h2>
+    
+    <% myorder.forEach(data=>{ %>
+        
+            <div class="processis" id="div<%=data.productimg %>">
+                <div>
+                <div><b>Order Date <%= data.orderdate %></b></div>
+                </div>
+            <div class="processis" style="display: flex;">
+            <div class="cls"><img src="<%= data.productimg %>" style="width: 150px; border-style: outset; border-color: black; margin-right:20px;"/></div>
+            <div style="margin: 20px; margin-right: 45px; width: 40%;">
+            <div class="cls"><b>Product Detail</b></div>
+            <div class="cls">Product Name: <%= data.productname %></div>
+            <div class="cls">Product Description: <%=data.productdes %></div>
+            <div class="cls">Product Price: <%=data.productprice %> Rs.</div>
+            </div>
+            <div>
+                <br>
+                <div class="cls"><b>Address</b></div>
+                <div class="cls">Name: <%= data.username %></div>
+                <div class="cls">Location: <%= data.address %><%= data.city %></div>
+                <div class="cls"><%= data.state %><%= data.pin %></div>
+                <div class="cls">Contact No. <%= data.contact %></div>
+            </div>
+            </div>
+            <div>
+                <div style="display: flex;justify-content: space-around">
+                    
+                    <div><b id="p<%=data.productimg%>">Status for Delivery:<%=data.flag %></b></div>
+                    <%if(data.flag==="delivered"){ %>
+                    <div><b>Delivery Date <%= data.delivereddate %></b></div>
+                    <% }%>
+                    <%if(data.flag=="submit" || data.flag=="conform"){ %>
+                        <div class="view" id="<%=data.productimg %><%=data.email %>" style="background-color: red;padding-top: 20px; cursor: pointer;">
+                            <div class="cancelorderis <%=data.productimg %> <%=data.email %>" ><b>Cancel Order</b></div><br>
+                        </div>
+                    <% }%>
+
+                </div>
+            </div>
+                </div>
+        <% }) %>
+       
+
+    
+</body>
+<script src="js/myorder.js"></script>
+</html>

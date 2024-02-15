@@ -1,0 +1,119 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+}
+
+header,nav {
+  padding: 10px;
+  background-color:white;
+  position: fixed;  
+  left: 0;  
+  right: 0;  
+  top: 0px;  
+  height: 30px;  
+  display: inline;  
+  align-items: center; 
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+}
+
+/* to arrange(abc/a b c) in a single line  */
+header * {  
+  display: flex;  
+}  
+
+/* to space between two linkes ie (home   registration   login) */
+header nav li { 
+  padding-top: 15px;
+  margin: 25px;  
+}  
+header nav li:hover{
+  text-shadow: 2px 2px 4px #3d3c3c;
+}
+
+header li a,p {  
+  color: black;  
+  text-decoration: none;  
+  /* to remove /add  decoration like underline etc */
+}
+
+
+
+/* home */
+.home_content{
+  background-color: azure;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 20px;
+
+}
+
+.btn{
+  margin-inline: 2px;
+  width :100px;
+  border-radius: 3px;
+  padding: 10px;
+  background-color:purple;
+  color: white;
+  cursor: pointer ;
+}
+
+/* login/registration */
+.form{
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+  h1{
+    text-align: center;
+    margin: bottom 20px;
+  }
+  input[type="submit"]{
+    background-color: #4caf50;
+    color: #fff;
+
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    /* background-color: aquamarine; */
+  }
+  input[type='text'],input[type='password'],input[type='email'],input[type='address']{
+    padding: 10px;
+    width:100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  input[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+  .validation{
+    color: red;
+}
+ 
+/* todo  */
+.left_task ,.right_task{
+  height:50%;
+  width:50%;
+  position: fixed;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 5px;
+  width: 400px;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.main_todo .right_task{
+  right: 10%;
+  position: fixed;
+}
+.main_todo .left_task{
+  left: 10%;
+  position: fixed;
+}

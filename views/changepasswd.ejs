@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>update password</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <style>
+    .li{
+        color:red; 
+        flex: 33%;
+    }
+    </style>
+</head>
+<body>
+    <br>
+   
+        <%- include("component/header",{username:username}) %>
+       
+    <br><br><br>
+    <% if(username===null) {%>
+        <h1>please login first <a href="/login ">click here</a></h1>
+    <% } else { %>
+            <div class="form">
+                <h4>The password has to be</h4>
+                <ul>
+                    <li class="li">Minimum 8 characters long</li>
+                    <li  class="li">One Uppercase letter at least</li>
+                    <li  class="li">One lowercase letter at least</li>
+                    <li  class="li">One Number</li>
+                </ul>
+                  <!-- <label for="name">Username</label> -->
+                  <input type="password" id="newpasswd" name="newpasswd" placeholder="new password" />
+            
+                  <!-- <label for="password">Password</label> -->
+                  <input type="password" id="confirmpasswd" name="confirmpasswd" placeholder="confirm password"required />
+                  <input type="submit" value="update" onclick="checkPassword()" id="uppass"/>
+            </div>
+                <p id="message" class="li"></p>
+    <% }%>
+
+    
+</body>
+<script src="js/changepassword.js">
+   
+    </script>
+</html>
