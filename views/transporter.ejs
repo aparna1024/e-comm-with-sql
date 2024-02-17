@@ -37,7 +37,7 @@
             <% orderdata.forEach(data=>{%>
 
                        <% if(data.flag=="conform"){ %>
-                    <div class="processis" id="<%= data.productimg %><%= data.userid %>" style="display:flex ">
+                    <div class="processis" id="ppis<%= data.productid %>" style="display:flex ">
                         <div style="width: 30%;">
                             <div class="cls"><b>User Details</b></div>
                             <div class="cls">User Name : <%= data.username %></div>
@@ -265,7 +265,7 @@
                     const nn=Number(nDispatchis.innerText);
                     nDispatchis.innerText=nn+1;
                     
-                    const divk=document.getElementById(pid+""+useremail);
+                    const divk=document.getElementById("ppis"+pid);
                     console.log(divk);
                     divk.remove();
                 }

@@ -65,7 +65,7 @@
             <div>
             <div style="text-shadow: 2px 2px 4px #3d3c3c;"><h1>New Order Request :-</h1></div>
                 <% allorderRec.forEach(data=>{ %>
-                    <% if(data.flag=="submit"){ %>
+                    <% if(data.flag==="submit"){ %>
                     <div class="processis" id="pr<%=data.productimg %><%=data.email %>">
                         
                         <div style="display: flex; justify-content: space-around">
@@ -141,8 +141,9 @@
                             <div style="display: flex; justify-content: space-around">
                                 <div><b>Status= <%= data.flag %></b></div>
                             </div>
-                            <% } %>
-                    </div>
+                        </div>
+                <% } %>
+                    
                 <% }) %>
                 
             </div>

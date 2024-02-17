@@ -4,6 +4,7 @@ const path=require("path")
 var session=require("express-session")
 const bcrypt=require("bcrypt");
 const soltrount=10;
+const sqlRegistration=require("../models/registration")
 const sqlconnection=require('../models/sqldb');
 app.use(
     session({
@@ -32,21 +33,13 @@ exports.postregistration=async(req,res,next)=>{
     flag="false";
     const salt=await bcrypt.genSalt(soltrount);
     const hash=await bcrypt.hash(req.body.password,salt);
-    sqlconnection.query(`SELECT * from user where email="${email}"`,function(err,result,fiels){
-
-        if(err) throw err;
-        if(result.length>0){
-            console.log("email already exist");
-            
+    let d=sqlRegistration.registration(username,email,hash,role,flag).then(function(data){
+        if(data=="1"){
+            res.render('login') 
         }else{
-            console.log("new email");
-            sqlconnection.query(`INSERT into user values("${username}", "${email}", "${hash}","${role}","${flag}")`,function(err,result){
-                if(err)throw err;
-                res.render('login') 
-            });
+            console.log("email already exist");
         }
-    })
-              
+    })      
 }
 
 

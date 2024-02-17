@@ -1,3 +1,6 @@
+
+const post_login = require('../models/login');
+const post_login_fun=post_login.login;
 const express = require("express");
 const app=express();
 const path=require("path")
@@ -40,10 +43,10 @@ exports.getlogin=(req,res,next)=>{
 exports.postlogin=(req,res,next)=>{
     const email=req.body.email;
     const password=req.body.password;
-    sqlconnection.query(`SELECT * from user where email="${email}"`,async function(err,result,field){
-        if(err)throw err;
-        if(result){
-            const data=JSON.parse(JSON.stringify(result));
+    let data=post_login_fun(email)
+    .then(async function(data){
+        if(data)
+        {
             const bypass=data[0].password;
             req.session.username=data[0].username;
             req.session.role=data[0].role;
@@ -52,17 +55,14 @@ exports.postlogin=(req,res,next)=>{
             req.session.isLoggedIn=true;
             const a=await bcrypt.compare(password,bypass);
             if(a){
-                
                 if(req.session.role=="transporter"){
                     res.redirect('/transporter');
                 }else
                 res.redirect('/');
             }else{
-                res.render('login');
+                res.redirect('/login');
             }
-
         }
     })
-
-
+    
 }

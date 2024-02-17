@@ -12,7 +12,8 @@ router.get('/getsaveAddress',cart.getsaveAddress);
 router.post('/orderSubmit',cart.postordersubmit);
 
 //Routes for transporter 
-router.post('/dispatchorder',cart.postdispatchorder);
-router.post('/deliverorder',cart.postdeliverorder);
-router.get('/transporter',cart.gettransporter);
+const tranporter=require('../controller/transporter')
+router.post('/dispatchorder',tranporter.postdispatchorder);
+router.post('/deliverorder',tranporter.postdeliverorder);
+router.get('/transporter',tranporter.gettransporter);
 module.exports=router;
